@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using QUnity.Utility;
+
+[ExecuteInEditMode]
 public class QuestryTerrain : MonoBehaviour
 {
 
