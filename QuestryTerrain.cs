@@ -36,7 +36,7 @@ public class QuestryTerrain : MonoBehaviour
 
     public void LoadHeightMapFromTexture()
     {
-        modifiedTerrainData.SetHeights(0, 0, QuestryTerrainUtils.ConvertGrayScaleTextureToHeightMap(heightMapImage, modifiedTerrainData.heightmapResolution, heightMapScale.y));
+        modifiedTerrainData.SetHeights(0, 0, QuestryTerrainUtils.ConvertGrayScaleTextureToHeightMap(heightMapImage, modifiedTerrainData.heightmapResolution, heightMapScale));
     }
 
     #endregion
