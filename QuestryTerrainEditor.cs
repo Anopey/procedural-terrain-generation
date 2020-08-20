@@ -7,10 +7,15 @@ using UnityEditor;
 public class QuestryTerrainEditor : Editor
 {
 
+    SerializedProperty heightMapScale, heightMapImage;
+
+    //foldouts
+    bool foldShowImportExportTexture;
 
     private void OnEnable()
     {
-        
+        heightMapScale = serializedObject.FindProperty("heightMapScale");
+        heightMapImage = serializedObject.FindProperty("heightMapImage");
     }
 
     public override void OnInspectorGUI()
@@ -19,7 +24,21 @@ public class QuestryTerrainEditor : Editor
 
         QuestryTerrain questryTerrain = (QuestryTerrain)target;
 
-        
+        foldShowImportExportTexture = EditorGUILayout.Foldout(foldShowImportExportTexture, "Import/Export Texture");
+        if (foldShowImportExportTexture)
+        {
+            GUILayout.Label("Import Heights From GreyScale Texture", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(heightMapImage);
+            EditorGUILayout.PropertyField(heightMapScale);
+            if(GUILayout.Button("Load Texture"))
+            {
+                questryTerrain.LoadHeightMapFromTexture();
+            }
+
+            EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+
+
+        }
 
         serializedObject.ApplyModifiedProperties();
     }
