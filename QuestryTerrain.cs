@@ -8,6 +8,19 @@ using QUnity.Utility;
 [ExecuteInEditMode]
 public class QuestryTerrain : MonoBehaviour
 {
+    private Terrain modifiedTerrain;
+    private TerrainData modifiedTerrainData;
+
+    [SerializeField]
+    private Texture2D heightMapImage;
+    [SerializeField]
+    private Vector3 heightMapScale = new Vector3(1, 1, 1);
+
+    private void OnEnable()
+    {
+        modifiedTerrain = this.GetComponent<Terrain>();
+        modifiedTerrainData = modifiedTerrain.terrainData;
+    }
 
     private void Awake()
     {
@@ -18,5 +31,14 @@ public class QuestryTerrain : MonoBehaviour
 
         gameObject.tag = "Terrain";
     }
+
+    #region Image Loading and Exporting
+
+    public void LoadHeightMapFromTexture()
+    {
+        modifiedTerrainData.SetHeights(0, 0, QuestryTerrainUtils.ConvertGrayScaleTextureToHeightMap(heightMapImage, modifiedTerrainData.heightmapResolution, heightMapScale.y));
+    }
+
+    #endregion
 
 }

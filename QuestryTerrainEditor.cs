@@ -19,7 +19,7 @@ public class QuestryTerrainEditor : Editor
 
         QuestryTerrain questryTerrain = (QuestryTerrain)target;
 
-
+        
 
         serializedObject.ApplyModifiedProperties();
     }
