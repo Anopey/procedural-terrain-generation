@@ -40,6 +40,12 @@ public class QuestryTerrainEditor : Editor
 
         }
 
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        if (GUILayout.Button("Reset"))
+        {
+            questryTerrain.ResetHeightMap();
+        }
+
         serializedObject.ApplyModifiedProperties();
     }
 

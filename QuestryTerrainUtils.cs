@@ -23,6 +23,15 @@ public static class QuestryTerrainUtils
             for (int y = 0; y < heightMapResolution; y++)
             {
                 heightMap[x, y] = textureMap[Mathf.CeilToInt((x * heightMapResolution * scale.x) + (y * scale.z)) % textureMap.Length].grayscale * scale.y;
+    public static float[,] ConstructZeroHeightMap(int resolution)
+    {
+        float[,] heightMap = new float[resolution, resolution];
+
+        for(int x = 0; x < resolution; x++)
+        {
+            for(int y = 0; y < resolution; y++)
+            {
+                heightMap[x, y] = 0;
             }
         }
 

@@ -41,4 +41,8 @@ public class QuestryTerrain : MonoBehaviour
 
     #endregion
 
+    public void ResetHeightMap()
+    {
+        modifiedTerrainData.SetHeights(0, 0, QuestryTerrainUtils.ConstructZeroHeightMap(modifiedTerrainData.heightmapResolution));
+    }
 }
