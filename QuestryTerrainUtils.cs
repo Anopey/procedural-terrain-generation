@@ -10,26 +10,31 @@ public static class QuestryTerrainUtils
     /// <summary>
     /// generates a heightmap from given greyscale texture.
     /// </summary>
-    /// <param name="grayScaleTexture"> If the texture is smaller than heightmap, then the texture will get repeated over the heightmap. </param>
+    /// <param name="texture"> If the texture * scale is smaller than heightmap, then the texture will get repeated over the heightmap. </param>
     /// <param name="heightMapResolution"> the resolution of the heightmap generated </param>
     /// <param name="scale"> how the height map will get scaled in each direction along the texture. set to Vector3.one for no scaling.</param>
-    public static float[,] ConvertGrayScaleTextureToHeightMap(Texture2D grayScaleTexture, int heightMapResolution, Vector3 scale)
+    public static float[,] ConvertGrayScaleTextureToHeightMap(Texture2D texture, int heightMapResolution, Vector3 scale)
     {
         float[,] heightMap = new float[heightMapResolution, heightMapResolution];
-        Color[] textureMap = grayScaleTexture.GetPixels(0, 0, Mathf.CeilToInt(heightMapResolution), Mathf.CeilToInt(heightMapResolution));
 
-        for (int x = 0; x < heightMapResolution; x++)
+        for (int y = 0; y < heightMapResolution; y++)
         {
-            for (int y = 0; y < heightMapResolution; y++)
+            for (int x = 0; x < heightMapResolution; x++)
             {
-                heightMap[x, y] = textureMap[Mathf.CeilToInt((x * heightMapResolution * scale.x) + (y * scale.z)) % textureMap.Length].grayscale * scale.y;
+                heightMap[x, y] = texture.GetPixel((int)(x * scale.x), (int)(y * scale.z)).grayscale * scale.y;
+            }
+        }
+
+        return heightMap;
+    }
+
     public static float[,] ConstructZeroHeightMap(int resolution)
     {
         float[,] heightMap = new float[resolution, resolution];
 
-        for(int x = 0; x < resolution; x++)
+        for (int x = 0; x < resolution; x++)
         {
-            for(int y = 0; y < resolution; y++)
+            for (int y = 0; y < resolution; y++)
             {
                 heightMap[x, y] = 0;
             }
