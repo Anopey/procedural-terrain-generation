@@ -16,12 +16,15 @@ public static class QuestryTerrainUtils
     public static float[,] ConvertGrayScaleTextureToHeightMap(Texture2D texture, int heightMapResolution, Vector3 scale)
     {
         float[,] heightMap = new float[heightMapResolution, heightMapResolution];
-        Color[] colorMap = texture.GetPixels(0,0, Math.Min((int)(heightMapResolution * scale.x), texture.width) , Math.Min((int)(heightMapResolution * scale.y), texture.height));
+        Vector2Int textureTakenResolution = new Vector2Int(Math.Min((int)(heightMapResolution * scale.x), texture.width), Math.Min((int)(heightMapResolution * scale.y), texture.height));
+        Color[] colorMap = texture.GetPixels(0, 0, textureTakenResolution.x, textureTakenResolution.y);
+        Debug.Log(colorMap.Length);
+        Debug.Log(heightMapResolution * heightMapResolution);
         for (int y = 0; y < heightMapResolution; y++)
         {
             for (int x = 0; x < heightMapResolution; x++)
             {
-                heightMap[y, x] = colorMap[(int)(y * heightMapResolution * scale.y + x * scale.x) % colorMap.Length].grayscale * scale.z;
+                heightMap[y, x] = colorMap[((int)(y * scale.y) * textureTakenResolution.x + (int)(x * scale.x)) % colorMap.Length].grayscale * scale.z;
             }
         }
 
