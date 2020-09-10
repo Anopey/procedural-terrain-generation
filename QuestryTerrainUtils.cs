@@ -27,7 +27,6 @@ public static class QuestryTerrainUtils
                     Debug.LogError("wtf at (" + x + "," + y + ").");
                     Debug.LogError("res: " + heightMapResolution + "\n texture width: " + texture.width + "\n texture height: " + texture.height + "\n 1-D accessed at: " + (y * heightMapResolution + x));
                     Debug.LogError("Get Pixels value: " + colorMap[y * heightMapResolution + x] + "\nGet Pixel Value: " + texture.GetPixel(x,y));
-                    return heightMap;
                 }
             }
         }
