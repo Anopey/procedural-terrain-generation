@@ -21,7 +21,7 @@ public static class QuestryTerrainUtils
         {
             for (int x = 0; x < heightMapResolution; x++)
             {
-                heightMap[y, x] = colorMap[(int)(y * heightMapResolution * scale.y + x * scale.x)].grayscale;
+                heightMap[y, x] = colorMap[(int)(y * heightMapResolution * scale.y + x * scale.x) % colorMap.Length].grayscale * scale.z;
             }
         }
 
